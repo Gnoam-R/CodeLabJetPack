@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 
 private const val TAG = "BlurWorker"
 
-class BlueWorker (ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
+class BlurWorker (ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx, params) {
 
     override suspend fun doWork(): Result {
 
@@ -24,11 +24,11 @@ class BlueWorker (ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx,
         )
         return withContext(Dispatchers.IO){
             return@withContext try {
-
                 // This is a utility function added to emulate slower work.
                 delay(DELAY_TIME_MILLIS)
 
                 // picture 변수 생성
+                // Bitmap으로 변환
                 val picture = BitmapFactory.decodeResource(
                     applicationContext.resources,
                     R.drawable.android_cupcake
@@ -42,7 +42,6 @@ class BlueWorker (ctx: Context, params: WorkerParameters) : CoroutineWorker(ctx,
                     "Output is $outputUri",
                     applicationContext
                 )
-
                 Result.success()
             } catch (throwable: Throwable) {
                 Log.e(
